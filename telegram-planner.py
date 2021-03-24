@@ -17,7 +17,12 @@ def create_parser():
 
     parser.add_argument('action')
     parser.add_argument('subaction')
-    parser.add_argument('--channel', dest='channel', required=False, default=None, help='Name of the channel to be used')
+    parser.add_argument('--channel', dest='channel', required=False, default=None,
+        help='Name of the channel to be used')
+    parser.add_argument('--datetime', dest='datetime', required=False, default=None,
+        help='Datetime for publishing the post (format YYYY-MM-DD HH:MM)')
+    parser.add_argument('--id', dest='id', required=False, default=None,
+        help='Name of the resources to be added (txt, png and pdf)')
 
     return parser
 

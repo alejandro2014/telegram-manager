@@ -34,7 +34,19 @@ class ArgsParser:
 
     async def process_add(self, args):
         if args.subaction == 'post':
-            await self.posts_manager.add()
+            if args.channel == None:
+                print('ERROR: No channel id specified')
+                self.exit_error(args)
+
+            if args.id == None:
+                print('ERROR: No message id specified')
+                self.exit_error(args)
+
+            if args.datetime == None:
+                print('ERROR: No datetime specified')
+                self.exit_error(args)
+
+            await self.posts_manager.add(args)
             self.exit_ok()
 
         self.exit_error(args)
