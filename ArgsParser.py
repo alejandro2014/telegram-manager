@@ -3,22 +3,23 @@ from ChannelsManager import ChannelsManager
 from PostsManager import PostsManager
 
 class ArgsParser:
-    def __init__(self):
+    def __init__(self, client):
+        self.client = client
         self.calendar_manager = CalendarManager()
-        self.channels_manager = ChannelsManager()
+        self.channels_manager = ChannelsManager(self.client)
         self.posts_manager = PostsManager()
 
-    def process_actions(self, args):
+    async def process_actions(self, args):
         if args.action == 'show':
-            self.process_show(args)
+            await self.process_show(args)
         elif args.action == 'add':
             self.process_add(args)
         elif args.action == 'delete':
             self.process_delete(args)
 
-    def process_show(self, args):
+    async def process_show(self, args):
         if args.subaction == 'channels':
-            self.channels_manager.show()
+            await self.channels_manager.show(self.client)
             self.exit_ok()
 
         if args.subaction == 'post':
