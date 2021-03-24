@@ -17,6 +17,7 @@ def create_parser():
 
     parser.add_argument('action')
     parser.add_argument('subaction')
+    parser.add_argument('--channel', dest='channel', required=False, default=None, help='Name of the channel to be used')
 
     return parser
 

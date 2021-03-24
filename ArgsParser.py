@@ -14,21 +14,20 @@ class ArgsParser:
             await self.process_show(args)
         elif args.action == 'add':
             await self.process_add(args)
-        elif args.action == 'delete':
-            await self.process_delete(args)
 
     async def process_show(self, args):
         if args.subaction == 'channels':
             await self.channels_manager.show()
             self.exit_ok()
 
-        if args.subaction == 'post':
-            await self.posts_manager.show()
-            self.exit_ok()
-
         if args.subaction == 'calendar':
-            channel_id = 
-            await self.calendar_manager.show(channel_id)
+            channel_id = args.channel
+
+            if channel_id == None:
+                print('ERROR: No channel id specified')
+                self.exit_error(args)
+
+            await self.calendar_manager.show(int(channel_id))
             self.exit_ok()
 
         self.exit_error(args)
@@ -36,21 +35,6 @@ class ArgsParser:
     async def process_add(self, args):
         if args.subaction == 'post':
             await self.posts_manager.add()
-            self.exit_ok()
-
-        if args.subaction == 'channel':
-            await self.channels_manager.add()
-            self.exit_ok()
-
-        self.exit_error(args)
-
-    async def process_delete(self, args):
-        if args.subaction == 'post':
-            await self.posts_manager.delete()
-            self.exit_ok()
-
-        if args.subaction == 'channel':
-            await self.channels_manager.delete()
             self.exit_ok()
 
         self.exit_error(args)
