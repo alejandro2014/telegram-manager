@@ -12,7 +12,7 @@ class ChannelsManager:
     async def delete(self):
         print('delete-channel')
 
-    async def show(self, client):
+    async def show(self):
         channels = []
 
         async for dialog in self.client.iter_dialogs():

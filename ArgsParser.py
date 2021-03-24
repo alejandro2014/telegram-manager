@@ -5,9 +5,9 @@ from PostsManager import PostsManager
 class ArgsParser:
     def __init__(self, client):
         self.client = client
-        self.calendar_manager = CalendarManager()
+        self.calendar_manager = CalendarManager(self.client)
         self.channels_manager = ChannelsManager(self.client)
-        self.posts_manager = PostsManager()
+        self.posts_manager = PostsManager(self.client)
 
     async def process_actions(self, args):
         if args.action == 'show':
@@ -19,7 +19,7 @@ class ArgsParser:
 
     async def process_show(self, args):
         if args.subaction == 'channels':
-            await self.channels_manager.show(self.client)
+            await self.channels_manager.show()
             self.exit_ok()
 
         if args.subaction == 'post':
@@ -27,7 +27,8 @@ class ArgsParser:
             self.exit_ok()
 
         if args.subaction == 'calendar':
-            await self.calendar_manager.show()
+            channel_id = 
+            await self.calendar_manager.show(channel_id)
             self.exit_ok()
 
         self.exit_error(args)

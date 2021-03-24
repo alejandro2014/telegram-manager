@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from telethon import TelegramClient
+from telethon import TelegramClient, functions, types
 
 from ArgsParser import ArgsParser
 

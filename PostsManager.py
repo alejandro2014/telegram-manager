@@ -1,6 +1,6 @@
 class PostsManager:
-    def __init__(self):
-        pass
+    def __init__(self, client):
+        self.client = client
 
     async def add(self):
         print('add-post')
