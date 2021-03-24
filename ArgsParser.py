@@ -13,9 +13,9 @@ class ArgsParser:
         if args.action == 'show':
             await self.process_show(args)
         elif args.action == 'add':
-            self.process_add(args)
+            await self.process_add(args)
         elif args.action == 'delete':
-            self.process_delete(args)
+            await self.process_delete(args)
 
     async def process_show(self, args):
         if args.subaction == 'channels':
@@ -23,33 +23,33 @@ class ArgsParser:
             self.exit_ok()
 
         if args.subaction == 'post':
-            self.posts_manager.show()
+            await self.posts_manager.show()
             self.exit_ok()
 
         if args.subaction == 'calendar':
-            self.calendar_manager.show()
+            await self.calendar_manager.show()
             self.exit_ok()
 
         self.exit_error(args)
 
-    def process_add(self, args):
+    async def process_add(self, args):
         if args.subaction == 'post':
-            self.posts_manager.add()
+            await self.posts_manager.add()
             self.exit_ok()
 
         if args.subaction == 'channel':
-            self.channels_manager.add()
+            await self.channels_manager.add()
             self.exit_ok()
 
         self.exit_error(args)
 
-    def process_delete(self, args):
+    async def process_delete(self, args):
         if args.subaction == 'post':
-            self.posts_manager.delete()
+            await self.posts_manager.delete()
             self.exit_ok()
 
         if args.subaction == 'channel':
-            self.channels_manager.delete()
+            await self.channels_manager.delete()
             self.exit_ok()
 
         self.exit_error(args)

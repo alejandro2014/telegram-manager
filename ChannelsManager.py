@@ -6,10 +6,10 @@ class ChannelsManager:
     def __init__(self, client):
         self.client = client
 
-    def add(self):
+    async def add(self):
         print('add-channel')
 
-    def delete(self):
+    async def delete(self):
         print('delete-channel')
 
     async def show(self, client):

@@ -2,5 +2,5 @@ class CalendarManager:
     def __init__(self):
         pass
 
-    def show(self):
+    async def show(self):
         print('show-calendar')

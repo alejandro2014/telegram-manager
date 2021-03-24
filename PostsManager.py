@@ -2,11 +2,11 @@ class PostsManager:
     def __init__(self):
         pass
 
-    def add(self):
+    async def add(self):
         print('add-post')
 
-    def delete(self):
+    async def delete(self):
         print('delete-post')
 
-    def show(self):
+    async def show(self):
         print('show-post')
