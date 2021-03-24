@@ -35,7 +35,7 @@ class ArgsParser:
     async def process_add(self, args):
         if args.subaction == 'post':
             if args.channel == None:
-                print('ERROR: No channel id specified')
+                print('ERROR: No --channel specified')
                 self.exit_error(args)
 
             if args.id == None:
