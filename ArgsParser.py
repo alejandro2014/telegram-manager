@@ -3,11 +3,13 @@ from ChannelsManager import ChannelsManager
 from PostsManager import PostsManager
 
 class ArgsParser:
-    def __init__(self, client):
+    def __init__(self, client, posts_path):
         self.client = client
+        self.posts_path = posts_path
+
         self.calendar_manager = CalendarManager(self.client)
         self.channels_manager = ChannelsManager(self.client)
-        self.posts_manager = PostsManager(self.client)
+        self.posts_manager = PostsManager(self.client, self.posts_path)
 
     async def process_actions(self, args):
         if args.action == 'show':
@@ -36,10 +38,6 @@ class ArgsParser:
         if args.subaction == 'post':
             if args.channel == None:
                 print('ERROR: No --channel specified')
-                self.exit_error(args)
-
-            if args.id == None:
-                print('ERROR: No message id specified')
                 self.exit_error(args)
 
             if args.datetime == None:

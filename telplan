@@ -11,6 +11,7 @@ with open('secret/telegram-planner.json') as f:
 
 api_id = secret_values['api_id']
 api_hash = secret_values['api_hash']
+posts_path = secret_values['posts_path']
 client = TelegramClient('anon', api_id, api_hash)
 
 def create_parser():
@@ -21,13 +22,11 @@ def create_parser():
     parser.add_argument('--channel', dest='channel', required=False, default=None,
         help='Name of the channel to be used')
     parser.add_argument('--datetime', dest='datetime', required=False, default=None,
-        help='Datetime for publishing the post (format YYYY-MM-DD HH:MM)')
-    parser.add_argument('--id', dest='id', required=False, default=None,
-        help='Name of the resources to be added (txt, png and pdf)')
+        help='Datetime for publishing the post (format YYYYMMDD-HHMM)')
 
     return parser
 
-args_parser = ArgsParser(client)
+args_parser = ArgsParser(client, posts_path)
 parser = create_parser()
 args = parser.parse_args()
 
