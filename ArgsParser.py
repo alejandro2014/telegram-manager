@@ -23,43 +23,37 @@ class ArgsParser:
             self.exit_ok()
 
         if args.subaction == 'calendar':
-            channel_id = args.channel
+            self.check_param(args, 'channel')
 
-            if channel_id == None:
-                print('ERROR: No channel id specified')
-                self.exit_error(args)
-
-            await self.calendar_manager.show(int(channel_id))
+            await self.calendar_manager.show(args.channel)
             self.exit_ok()
 
         self.exit_error(args)
 
     async def process_add(self, args):
         if args.subaction == 'post':
-            if args.channel == None:
-                print('ERROR: No --channel specified')
-                self.exit_error(args)
-
-            if args.text_path == None:
-                print('ERROR: No --text-path specified')
-                self.exit_error(args)
-
-            if args.datetime == None:
-                print('ERROR: No datetime specified')
-                self.exit_error(args)
+            self.check_param(args, 'channel')
+            self.check_param(args, 'text_path', param_name_text='text-path')
+            self.check_param(args, 'datetime')
 
             await self.posts_manager.add_post(args.channel, args.text_path, args.datetime)
             self.exit_ok()
 
         if args.subaction == 'posts':
-            if args.channel == None:
-                print('ERROR: No --channel specified')
-                self.exit_error(args)
+            self.check_param(args, 'channel')
 
             await self.posts_manager.add_multiple_posts(args.channel)
             self.exit_ok()
 
         self.exit_error(args)
+
+    def check_param(self, args, param_name, param_name_text=None):
+        if not param_name_text:
+            param_name_text = param_name
+
+        if getattr(args, param_name) == None:
+            print(f'ERROR: No --{param_name_text} specified')
+            self.exit_error(args)
 
     def exit_ok(self):
         exit()

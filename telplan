@@ -9,10 +9,7 @@ from ArgsParser import ArgsParser
 with open('secret/telegram-planner.json') as f:
     secret_values = json.load(f)
 
-api_id = secret_values['api_id']
-api_hash = secret_values['api_hash']
-posts_path = secret_values['posts_path']
-client = TelegramClient('anon', api_id, api_hash)
+client = TelegramClient('anon', secret_values['api_id'], secret_values['api_hash'])
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -28,7 +25,7 @@ def create_parser():
 
     return parser
 
-args_parser = ArgsParser(client, posts_path)
+args_parser = ArgsParser(client, secret_values['posts_path'])
 parser = create_parser()
 args = parser.parse_args()
 
