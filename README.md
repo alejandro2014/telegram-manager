@@ -40,4 +40,4 @@ The possible actions that can be performed are:
 
 ## Considerations
 * When we use datetime, the format must be _YYYYMMDD-HHmm_.
-* When we use the _add posts_ command, the directory specified in the configuration json (see requeriments) will be used, and the text files inside the directory must have the format _YYYYMMDD-HHmm.txt_
+* When we use the _add posts_ command, the directory specified in the configuration json (see requirements) will be used, and the text files inside the directory must have the format _YYYYMMDD-HHmm.txt_
