@@ -14,8 +14,8 @@ client = TelegramClient('anon', secret_values['api_id'], secret_values['api_hash
 def create_parser():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('action')
-    parser.add_argument('subaction')
+    parser.add_argument('action', help='Main action to be performed (add, show)')
+    parser.add_argument('entity', help='Entity or entities where the action is performed (calendar, channels, post, posts)')
     parser.add_argument('--channel', dest='channel', required=False, default=None,
         help='Name of the channel to be used')
     parser.add_argument('--text-path', dest='text_path', required=False, default=None,
