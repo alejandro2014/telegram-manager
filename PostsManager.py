@@ -23,7 +23,7 @@ class PostsManager:
 
         print(f'----- Scheduling post for {datetime} / {timedelta}-----')
         print(text)
-        #await self.client.send_message(entity, text, schedule=timedelta)
+        await self.client.send_message(entity, text, schedule=timedelta)
 
     def get_files_structure(self, directory):
         files = {}
