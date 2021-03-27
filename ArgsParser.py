@@ -40,11 +40,15 @@ class ArgsParser:
                 print('ERROR: No --channel specified')
                 self.exit_error(args)
 
+            if args.text_path == None:
+                print('ERROR: No --text-path specified')
+                self.exit_error(args)
+
             if args.datetime == None:
                 print('ERROR: No datetime specified')
                 self.exit_error(args)
 
-            await self.posts_manager.add_single_post(args)
+            await self.posts_manager.add_post(args.channel, args.text_path, args.datetime)
             self.exit_ok()
 
         if args.subaction == 'posts':
@@ -52,7 +56,7 @@ class ArgsParser:
                 print('ERROR: No --channel specified')
                 self.exit_error(args)
 
-            await self.posts_manager.add_multiple_posts(args)
+            await self.posts_manager.add_multiple_posts(args.channel)
             self.exit_ok()
 
         self.exit_error(args)

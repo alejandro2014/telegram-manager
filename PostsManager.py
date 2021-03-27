@@ -6,36 +6,24 @@ class PostsManager:
         self.client = client
         self.posts_path = posts_path
 
-    async def add_single_post(self, args):
-        channel_id = args.channel
-        datetime = args.datetime
-        text_path = f'{self.posts_path}/{args.datetime}.txt'
-
-        await self.add_post(text_path, args, datetime=args.datetime)
-
-    async def add_multiple_posts(self, args):
-        channel_id = args.channel
-
+    async def add_multiple_posts(self, channel_id):
         files = self.get_files_structure(self.posts_path)
 
         for file in files.keys():
-            await self.add_post(files[file]['txt'], args)
+            text_path = files[file]['txt']
+            datetime = os.path.basename(text_path).split('.')[0]
+            await self.add_post(channel_id, text_path, datetime)
 
-    async def add_post(self, text_path, args, datetime=None):
+    async def add_post(self, channel_id, text_path, datetime):
         with open(text_path, 'r') as f:
             text = f.read()
 
-        if not datetime:
-            datetime = os.path.basename(text_path).split('.')[0]
-
-        entity = await self.client.get_entity(f'https://t.me/{args.channel}')
+        entity = await self.client.get_entity(f'https://t.me/{channel_id}')
         timedelta = self.calculate_delta(datetime)
 
         print(f'----- Scheduling post for {datetime} / {timedelta}-----')
         print(text)
-        await self.client.send_message(entity, text, schedule=timedelta)
-
-    import os
+        #await self.client.send_message(entity, text, schedule=timedelta)
 
     def get_files_structure(self, directory):
         files = {}
