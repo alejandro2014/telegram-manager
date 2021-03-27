@@ -44,7 +44,15 @@ class ArgsParser:
                 print('ERROR: No datetime specified')
                 self.exit_error(args)
 
-            await self.posts_manager.add(args)
+            await self.posts_manager.add_single_post(args)
+            self.exit_ok()
+
+        if args.subaction == 'posts':
+            if args.channel == None:
+                print('ERROR: No --channel specified')
+                self.exit_error(args)
+
+            await self.posts_manager.add_multiple_posts(args)
             self.exit_ok()
 
         self.exit_error(args)

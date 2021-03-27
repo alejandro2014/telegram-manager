@@ -11,10 +11,10 @@ class ChannelsManager:
 
         async for dialog in self.client.iter_dialogs():
             if isinstance(dialog.entity, Channel) and dialog.entity.creator and dialog.entity.broadcast:
-                print(dialog.stringify())
                 channels.append({
                     'name': dialog.name,
-                    'id': str(dialog.entity.id)
+                    'id': str(dialog.entity.id),
+                    'id-text': dialog.entity.username if dialog.entity.username else '-'
                 })
 
         table_formatter = TableFormatter()
