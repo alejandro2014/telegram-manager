@@ -18,11 +18,11 @@ class ArgsParser:
             await self.process_add(args)
 
     async def process_show(self, args):
-        if args.subaction == 'channels':
+        if args.entity == 'channels':
             await self.channels_manager.show()
             self.exit_ok()
 
-        if args.subaction == 'calendar':
+        if args.entity == 'calendar':
             self.check_param(args, 'channel')
 
             await self.calendar_manager.show(args.channel)
@@ -31,7 +31,7 @@ class ArgsParser:
         self.exit_error(args)
 
     async def process_add(self, args):
-        if args.subaction == 'post':
+        if args.entity == 'post':
             self.check_param(args, 'channel')
             self.check_param(args, 'text_path', param_name_text='text-path')
             self.check_param(args, 'datetime')
@@ -39,7 +39,7 @@ class ArgsParser:
             await self.posts_manager.add_post(args.channel, args.text_path, args.datetime)
             self.exit_ok()
 
-        if args.subaction == 'posts':
+        if args.entity == 'posts':
             self.check_param(args, 'channel')
 
             await self.posts_manager.add_multiple_posts(args.channel)
@@ -59,5 +59,5 @@ class ArgsParser:
         exit()
 
     def exit_error(self, args):
-        print(f'Invalid action: {args.action}.{args.subaction}')
+        print(f'Invalid action: {args.action}.{args.entity}')
         exit(1)
